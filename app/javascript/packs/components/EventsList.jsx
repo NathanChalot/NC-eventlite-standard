@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 import EventsListItem from './EventsListItem';
 
 class EventsList extends React.Component {
-  propTypes = {
-    events: PropTypes.arrayOf({
-      event: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        start_datetime: PropTypes.string.isRequired,
-        location: PropTypes.string.isRequired
+  static propTypes = {
+    events: PropTypes.arrayOf(
+      PropTypes.shape({
+        event: PropTypes.shape({
+          title: PropTypes.string.isRequired,
+          start_datetime: PropTypes.string.isRequired,
+          location: PropTypes.string.isRequired
+        })
       })
-    })
+    )
   };
 
   render() {

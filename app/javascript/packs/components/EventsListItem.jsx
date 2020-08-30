@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class EventsListItem extends React.Component {
-  propTypes = {
+  static propTypes = {
     event: PropTypes.shape({
       title: PropTypes.string.isRequired,
       start_datetime: PropTypes.string.isRequired,
