@@ -11,10 +11,12 @@ class EventsListItem extends React.Component {
   };
 
   render() {
+    const formattedDate = new Date(this.props.event.start_datetime);
+
     return (
       <div className="event">
         <h2 className="event-title">{this.props.event.title}</h2>
-        <div className="event-datetime">{this.props.event.start_datetime}</div>
+        <div className="event-datetime">{formattedDate.toLocaleString()}</div>
         <div className="event-location">{this.props.event.location}</div>
       </div>
     );
