@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import EventsList from './EventsList';
+
 class EventLite extends React.Component {
   /*
   ** To me loading events in state after getting them through
@@ -14,11 +16,7 @@ class EventLite extends React.Component {
   render() {
     return (
       <div>
-        { this.state.events.map((event) => {
-          return (
-            <p>{event.title}</p>
-          );
-        })}
+        <EventsList events={this.state.events}/>
       </div>
     );
   }
