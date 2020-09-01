@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import EventsList from './EventsList';
+import EventForm from './EventForm';
 
 class EventLite extends React.Component {
   /*
@@ -16,6 +17,7 @@ class EventLite extends React.Component {
   render() {
     return (
       <div>
+        <EventForm />
         <EventsList events={this.state.events}/>
       </div>
     );
