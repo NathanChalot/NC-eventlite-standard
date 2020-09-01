@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 
 import EventsList from './EventsList';
 import EventForm from './EventForm';
@@ -11,7 +12,53 @@ class EventLite extends React.Component {
   ** TODO => findout && do it another way
   */
   state = {
-    events: this.props.events
+    events: this.props.events,
+    title: "",
+    start_datetime: "",
+    location: ""
+  };
+
+
+  /*
+  ** here we use computed property name
+  ** see -> https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer
+  ** otherwise we should do something like:
+  ** const newState = {};
+  ** newState[name] = value;
+  ** this.setState(newState);
+  */
+  handleInput = (e) => {
+    e.preventDefault();
+    const value = e.target.value;
+    const name = e.target.name;
+
+    this.setState({
+      [name]: value
+    });
+  };
+
+  createNewEvent = (e) => {
+    e.preventDefault();
+
+    const newEvent = {
+      title: this.state.title,
+      start_datetime: this.state.start_datetime,
+      location: this.state.location,
+    }
+    axios({
+      method: 'POST',
+      url: '/events',
+      data: {
+        event: newEvent
+      },
+      headers: {
+        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
+      }
+    }).then((response) => {
+      this.addNewEvent(response.data);
+    }).catch((error) => {
+      console.log(error)
+    });
   };
 
   addNewEvent = (event) => {
@@ -25,7 +72,12 @@ class EventLite extends React.Component {
   render() {
     return (
       <div>
-        <EventForm addNewEvent={this.addNewEvent}/>
+        <EventForm
+          title={this.state.title}
+          start_datetime={this.state.start_datetime}
+          location={this.state.location}
+          handleInput={this.handleInput}
+          createNewEvent={this.createNewEvent}/>
         <EventsList events={this.state.events}/>
       </div>
     );
