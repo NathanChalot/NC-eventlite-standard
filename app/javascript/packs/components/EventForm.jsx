@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 
 class EventForm extends React.Component {
@@ -11,6 +12,10 @@ class EventForm extends React.Component {
     title: "",
     start_datetime: "",
     location: ""
+  }
+
+  static propTypes = {
+    addNewEvent: PropTypes.func.isRequired
   }
 
   /*
@@ -43,7 +48,7 @@ class EventForm extends React.Component {
         'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').content
       }
     }).then((response) => {
-      console.log(response)
+      this.props.addNewEvent(response.data);
     }).catch((error) => {
       console.log(error)
     });

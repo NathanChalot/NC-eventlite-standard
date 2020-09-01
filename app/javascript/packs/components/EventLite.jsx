@@ -14,10 +14,16 @@ class EventLite extends React.Component {
     events: this.props.events
   };
 
+  addNewEvent = (event) => {
+    const events = [event, ...this.state.events];
+
+    this.setState({events: events});
+  }
+
   render() {
     return (
       <div>
-        <EventForm />
+        <EventForm addNewEvent={this.addNewEvent}/>
         <EventsList events={this.state.events}/>
       </div>
     );
